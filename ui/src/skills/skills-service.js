@@ -7,7 +7,7 @@ export class SkillsService{
     this.http = http;
   }
   getSkills() {
-    return this.http.fetch('http://127.0.0.1:8080/')
+    return this.http.fetch('http://api.marktranter.com/skills')
       .then(d => d.json());
   }
 }

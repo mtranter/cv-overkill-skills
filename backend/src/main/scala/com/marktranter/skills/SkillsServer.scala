@@ -69,7 +69,7 @@ object Main extends StreamApp {
   override def stream(args: List[String]): fs2.Stream[Task,Nothing] = {
     BlazeBuilder
       .bindHttp(8080, "0.0.0.0")
-      .mountService(service, "/")
+      .mountService(service, "/skills")
       .serve
   }
 }
