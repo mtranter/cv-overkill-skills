@@ -7,7 +7,6 @@ steps:
     commands:
       - npm install
       - jspm install
-      - gulp test
       - gulp bundle
   backend_build:
     image: hseeberger/scala-sbt
