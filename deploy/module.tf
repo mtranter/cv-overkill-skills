@@ -34,7 +34,7 @@ data "template_file" "task_definition" {
 
 module "skills_backend" {
   source                        = "github.com/mtranter/cv-overkill-terraform?ref=v1.5//modules/ecs-service"
-  alb_listener_rule_priority    = 85
+  alb_listener_rule_priority    = 82
   alb_condition_field           = "path-pattern"
   alb_condition_values          = "/skills*"
   service_name                  = "skills-service"
