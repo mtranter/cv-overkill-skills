@@ -42,6 +42,6 @@ module "skills_backend" {
   service_port                  = "8080"
   task_definition               = "${data.template_file.task_definition.rendered}"
   desired_count                 = 1
-  health_check_path = "/skills"
+  health_check_path             = "/skills"
 
 }
