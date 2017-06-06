@@ -6,6 +6,7 @@ steps:
     description: Build Aurelia App
     commands:
       - npm install
+      - jspm config endpoints.github.auth ${{GH_TOKEN}}
       - jspm install
       - gulp bundle
   backend_build:
