@@ -1,4 +1,4 @@
-import {SkillsService} from './skills-service'
+import {SkillsService} from './../skills-service'
 import {inject} from 'aurelia-framework'
 
 @inject(SkillsService)
