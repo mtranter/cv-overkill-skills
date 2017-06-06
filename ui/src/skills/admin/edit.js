@@ -1,4 +1,7 @@
+import {SkillsService} from './skills-service'
+import {inject} from 'aurelia-framework'
 
+@inject(SkillsService)
 export class Edit {
   constructor(skillsSvc) {
     this.svc = skillsSvc;
