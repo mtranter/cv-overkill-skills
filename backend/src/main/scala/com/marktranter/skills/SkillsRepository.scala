@@ -15,7 +15,7 @@ trait SkillsRepository {
   def saveSkill(skill: Skill): Future[Unit]
   def getSkills(): Future[Seq[Skill]]
   def deleteSkill(name: String): Future[Unit]
-  def udateSkill(name: String, skillLevel: Int): Future[Unit]
+  def updateSkill(name: String, skillLevel: Int): Future[Unit]
 }
 
 
@@ -51,7 +51,7 @@ class MongoSkillsRepository(db: DefaultDB)(implicit ec: ExecutionContext) extend
       col.find[BSONDocument](BSONDocument.empty).cursor[Skill]().collect[Seq](-1, (s: Seq[Skill], t: Throwable) => Cont(s))
     }
 
-  override def udateSkill(name: String, skillLevel: Int): Future[Unit] = {
+  override def updateSkill(name: String, skillLevel: Int): Future[Unit] = {
     val updateOp = col.updateModifier(
       BSONDocument("$set" -> BSONDocument("skillLevel" -> skillLevel)))
     col.findAndModify(BSONDocument("_id" -> name), updateOp).map(_ => ())

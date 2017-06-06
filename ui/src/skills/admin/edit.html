@@ -1,0 +1,17 @@
+<template>
+  <require from="./edit.css"></require>
+  <div class="row">
+    <h1 class="page-header">Skills
+    </h1>
+  </div>
+  <div class="row" repeat.for="skill in skills">
+    <div class="col-md-10">
+      <div>${skill.name}</div>
+      <slider value.bind="skill.skillLevel" opts.bind="sliderOpts"></slider>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-danger" click.delegate="$parent.updateSkill(skill)"><i class="fa fa-save"></i></button>
+      <button class="btn btn-danger" click.delegate="$parent.deleteSkill(skill)"><i class="fa fa-remove"></i></button>
+    </div>
+  </div>
+</template>

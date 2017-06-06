@@ -57,11 +57,12 @@ object Main extends StreamApp {
           repo <- Task.fromFuture(skillsRepo)
           skills <- Task.fromFuture(repo.getSkills())
         } yield skills.find(s => s.name == name) match {
-          case Some(sk) => repo.udateSkill(name, newLevel.skillLevel).map(_ => Status.Ok)
+          case Some(sk) => repo.updateSkill(name, newLevel.skillLevel).map(_ => Status.Ok)
           case None => Future.successful(Status.NotFound)
         }
         f <- Task.fromFuture(s)
       } yield Response(f)
+    case req@DELETE -> Root / name as AuthorizedUser(AdminRole) => Ok(skillsRepo.flatMap(r => r.deleteSkill(name)))
   }
 
   val service: HttpService = CORS(authMiddleware(roleMiddleware(skillsService)))
