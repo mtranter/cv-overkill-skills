@@ -1,0 +1,12 @@
+[
+  {
+    "name": "skills-service",
+    "image": "mtranter/cv-skills:${image_tag}",
+    "cpu": 256,
+    "memory": 256,
+    "portMappings": [{"containerPort": 8080}],
+    "environment":[
+      {"name": "MONGO_CONNECTION", "value": "mongodb://mongo.marktranter.com/"}
+    ]
+  }
+]

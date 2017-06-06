@@ -1,0 +1,40 @@
+version: '1.0'
+steps:
+  aurelia_build:
+    image: mtranter/ui-module-build:latest
+    working_directory: ./ui
+    description: Build Aurelia App
+    commands:
+      - npm install
+      - jspm install
+      - gulp test
+      - gulp bundle
+  backend_build:
+    image: hseeberger/scala-sbt
+    working_directory: ${{main_clone}}/backend
+    description: Build backend
+    commands:
+      - sbt compile assembly
+  backend_docker:
+    type: build
+    title: Build backend docker image
+    working_directory: ${{backend_build}}
+    dockerfile: Dockerfile
+    image_name: mtranter/cv-skills
+    tag: '${{CF_BUILD_ID}}'
+  push_backend:
+    type: push
+    title: Push Backend
+    candidate: ${{backend_docker}}
+    tag: '${{CF_BUILD_ID}}'
+  deploy:
+    image: hashicorp/terraform
+    working_directory: ${{main_clone}}/deploy
+    description: Deploy using Terraform
+    environment:
+      - AWS_ACCESS_KEY_ID=${{AWS_ACCESS_KEY_ID}}
+      - AWS_SECRET_ACCESS_KEY=${{AWS_SECRET_ACCESS_KEY}}
+    commands:
+      - terraform init -force-copy
+      - terraform get
+      - terraform apply -var 'build_id=${{CF_BUILD_ID}}'

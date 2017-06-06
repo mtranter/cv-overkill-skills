@@ -1,0 +1,22 @@
+<template>
+  <require from="./skills.css"></require>
+  <section id="skills" name="skills"></section>
+  <div id="skills-wrapper" class="f">
+    <div class="container">
+      <div class="row">
+        <h3 class="text-center">Skills</h3>
+
+        <!-- INTRO INFORMATION-->
+        <div class="col-lg-6 col-lg-offset-3">
+          <article class="experience-item" repeat.for="skill of skills">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="${skill.skillLevel}" aria-valuemin="0" aria-valuemax="100" style="width: ${skill.skillLevel}%;">
+                <span class="sr-only">${skill.skillLevel}%</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div><!-- /container -->
+  </div>
+</template>
