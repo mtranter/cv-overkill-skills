@@ -10,7 +10,7 @@ steps:
       - jspm install
       - gulp bundle
   backend_build:
-    image: ${{build_build_image}}
+    image: hseeberger/scala-sbt
     working_directory: ${{main_clone}}/backend
     description: Build backend
     commands:
