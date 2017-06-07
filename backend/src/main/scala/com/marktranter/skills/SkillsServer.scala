@@ -3,14 +3,15 @@ import com.marktranter.skills.models.Skill
 import fs2.{Strategy, Task}
 import org.http4s.{AuthedService, HttpService}
 import org.http4s.dsl.Root
-import org.http4s.server.{AuthMiddleware}
-import org.http4s.server.middleware.CORS
+import org.http4s.server.AuthMiddleware
+import org.http4s.server.middleware.{CORS, CORSConfig}
 import org.http4s.server.blaze._
 import org.http4s.util.StreamApp
 import com.marktranter.skills.auth._
-
+import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
-import org.http4s._, org.http4s.dsl._
+import org.http4s._
+import org.http4s.dsl._
 import org.http4s.circe._
 import io.circe.syntax._
 import io.circe.generic.auto._
@@ -65,6 +66,11 @@ object Main extends StreamApp {
     case req@DELETE -> Root / name as AuthorizedUser(AdminRole) => Ok(skillsRepo.flatMap(r => r.deleteSkill(name)))
   }
 
+  val corsCfg = CORSConfig(
+    anyOrigin = true,
+    anyMethod = true,
+    allowCredentials = true,
+    maxAge = 1.day.toSeconds)
   val service: HttpService = CORS(authMiddleware(roleMiddleware(skillsService)))
 
   override def stream(args: List[String]): fs2.Stream[Task,Nothing] = {

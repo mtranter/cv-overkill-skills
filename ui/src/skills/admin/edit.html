@@ -6,7 +6,7 @@
   </div>
   <div class="row skill" repeat.for="skill in skills">
     <div class="col-md-10">
-      <div>${skill.name}</div>
+      <div class="skill-name">${skill.name}</div>
       <slider value.bind="skill.skillLevel" opts.bind="sliderOpts"></slider>
     </div>
     <div class="col-md-2">
