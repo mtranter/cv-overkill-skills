@@ -14,7 +14,7 @@ steps:
     working_directory: ${{main_clone}}/backend
     description: Build backend
     commands:
-      - sbt compile assembly
+      - sbt assembly
   backend_docker:
     type: build
     title: Build backend docker image
