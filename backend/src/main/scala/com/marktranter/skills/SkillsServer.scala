@@ -71,7 +71,7 @@ object Main extends StreamApp {
     anyMethod = true,
     allowCredentials = true,
     maxAge = 1.day.toSeconds)
-  val service: HttpService = CORS(authMiddleware(roleMiddleware(skillsService)))
+  val service: HttpService = CORS(authMiddleware(roleMiddleware(skillsService)),corsCfg)
 
   override def stream(args: List[String]): fs2.Stream[Task,Nothing] = {
     BlazeBuilder
