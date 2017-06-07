@@ -1,4 +1,4 @@
-FROM openjdk:8-alpine
+FROM hseeberger/scala-sbt
 RUN mkdir /app
 ADD target/scala-2.12/skills-1.0.jar /app/
 EXPOSE 8080

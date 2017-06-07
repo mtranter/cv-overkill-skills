@@ -9,23 +9,16 @@ steps:
       - jspm config endpoints.github.auth ${{GH_TOKEN}}
       - jspm install
       - gulp bundle
-  build_build_image:
-    type: build
-    title: Create a Build sbt image using Docker layer caching to cache sbt dependencies
-    image_name: mtranter/skills-sbt
-    working_directory: ${{main_clone}}/backend
-    tag: latest
-    dockerfile: Dockerfile.build
   backend_build:
     image: ${{build_build_image}}
-    working_directory: /app
+    working_directory: ${{main_clone}}/backend
     description: Build backend
     commands:
       - sbt compile assembly
   backend_docker:
     type: build
     title: Build backend docker image
-    working_directory: ${{backend_build}}/app
+    working_directory: ${{main_clone}}/backend
     dockerfile: Dockerfile
     image_name: mtranter/cv-skills
     tag: '${{CF_BUILD_ID}}'

@@ -1,8 +1,0 @@
-FROM judo/sbt:13.8
-RUN mkdir -p /app/project/ /app/project/src
-ADD build.sbt /app/
-ADD /project/* /app/project/
-WORKDIR /app
-RUN sbt reload
-ADD /src/* /app/src/
-ADD /Dockerfile /app/
