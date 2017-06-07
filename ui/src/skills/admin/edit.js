@@ -4,7 +4,7 @@ import {inject} from 'aurelia-framework'
 @inject(SkillsService)
 export class Edit {
   constructor(skillsSvc) {
-    this.svc = skillsSvc;
+    this.skillsSvc = skillsSvc;
     this.opts = { max:100, step:5 };
   }
   attached() {
