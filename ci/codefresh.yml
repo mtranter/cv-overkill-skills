@@ -21,12 +21,11 @@ steps:
     working_directory: /app
     description: Build backend
     commands:
-      - cd /app
       - sbt compile assembly
   backend_docker:
     type: build
     title: Build backend docker image
-    working_directory: /
+    working_directory: /app
     dockerfile: Dockerfile
     image_name: mtranter/cv-skills
     tag: '${{CF_BUILD_ID}}'
