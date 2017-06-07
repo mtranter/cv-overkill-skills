@@ -5,4 +5,4 @@ WORKDIR /app
 ADD /project/* /app/project/
 RUN sbt reload
 ADD /src/* /app/src/
-ADD /Dockerfile /app/Dockerfile
+ADD /Dockerfile /app/
