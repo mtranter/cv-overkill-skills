@@ -14,9 +14,10 @@ steps:
     title: Create a Build sbt image using Docker layer caching to cache sbt dependencies
     image_name: mtranter/skills-sbt
     working_directory: ${{main_clone}}/backend
+    tag: latest
     dockerfile: Dockerfile.build
   backend_build:
-    image: mtranter/skills-sbt
+    image: ${{build_build_image}}
     working_directory: ${{build_build_image}}/app
     description: Build backend
     commands:
