@@ -1,0 +1,7 @@
+FROM judo/sbt:13.8
+RUN mkdir -p /app/project/ /app/project/src
+ADD build.sbt /app/
+WORKDIR /app
+ADD /project/* /app/project/
+RUN sbt reload
+ADD /src/* /app/src/
