@@ -4,7 +4,7 @@
     <h1 class="page-header">Skills
     </h1>
   </div>
-  <div class="row skill" repeat.for="skill in skills">
+  <div class="row skill" repeat.for="skill of skills">
     <div class="col-md-10">
       <div class="skill-name">${skill.name}</div>
       <slider value.bind="skill.skillLevel" opts.bind="$parent.sliderOpts"></slider>
