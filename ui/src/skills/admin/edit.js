@@ -7,7 +7,7 @@ export class Edit {
     this.svc = skillsSvc;
     this.opts = {max:100, step:5}
   }
-  attached() {chrome
+  attached() {
     this.skillsSvc.getSkills().then(s => this.skills = s);
   }
   updateSkill(skill) {
