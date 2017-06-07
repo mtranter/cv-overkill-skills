@@ -26,7 +26,7 @@ steps:
   backend_docker:
     type: build
     title: Build backend docker image
-    working_directory: /app
+    working_directory: /
     dockerfile: Dockerfile
     image_name: mtranter/cv-skills
     tag: '${{CF_BUILD_ID}}'
