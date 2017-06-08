@@ -7,7 +7,7 @@
   <div class="row new-skill">
     <h3>New Skill</h3>
     <div class="col-md-10">
-      <div class="skill-name">${newSkill.name}</div>
+      <input type="text" value.bind="newSkill.name" />
       <slider value.bind="newSkill.skillLevel" opts.bind="sliderOpts"></slider>
     </div>
     <div class="col-md-2">
