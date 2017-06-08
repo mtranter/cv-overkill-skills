@@ -44,7 +44,7 @@ class MongoSkillsRepository(db: DefaultDB)(implicit ec: ExecutionContext) extend
   }
 
   override def deleteSkill(name: String): Future[Unit] = {
-    col.findAndRemove(BSONDocument("$set" -> BSONDocument("name" -> name))).map(_=>())
+    col.findAndRemove(BSONDocument("_id" -> name)).map(_=>())
   }
 
   override def getSkills(): Future[Seq[Skill]] = {
