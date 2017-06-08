@@ -69,6 +69,7 @@ object Main extends StreamApp {
   val corsCfg = CORSConfig(
     anyOrigin = true,
     anyMethod = true,
+    allowedHeaders = Some(Set("authorization","content-type")),
     allowCredentials = true,
     maxAge = 1.day.toSeconds)
   val service: HttpService = CORS(authMiddleware(roleMiddleware(skillsService)),corsCfg)
