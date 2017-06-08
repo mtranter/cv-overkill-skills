@@ -10,6 +10,9 @@ export class SkillsService{
     return this.http.fetch('http://api.marktranter.com/skills')
       .then(d => d.json());
   }
+  addSkill(skill) {
+    return this.http.fetch(`http://api.marktranter.com/skills/`, {method:'POST', body: JSON.stringify(skill)})
+  }
   updateSkill(skill) {
     return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}`, {method:'PATCH', body: JSON.stringify({skillLevel: skill.skillLevel})})
   }

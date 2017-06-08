@@ -4,10 +4,20 @@
     <h1 class="page-header">Skills
     </h1>
   </div>
+  <div class="row new-skill">
+    <h3>New Skill</h3>
+    <div class="col-md-10">
+      <div class="skill-name">${newSkill.name}</div>
+      <slider value.bind="newSkill.skillLevel" opts.bind="sliderOpts"></slider>
+    </div>
+    <div class="col-md-2">
+      <button enabled.bind="newSkill.name.length > 0" class="btn btn-primary" click.delegate="addSkill(newSkill)"><i class="fa fa-save"></i></button>
+    </div>
+  </div>
   <div class="row skill" repeat.for="skill of skills">
     <div class="col-md-10">
       <div class="skill-name">${skill.name}</div>
-      <slider value.bind="skill.skillLevel & debounce:850" opts.bind="$parent.sliderOpts"></slider>
+      <slider value.bind="skill.skillLevel" opts.bind="$parent.sliderOpts"></slider>
     </div>
     <div class="col-md-2">
       <button class="btn btn-primary" click.delegate="$parent.updateSkill(skill)"><i class="fa fa-save"></i></button>
