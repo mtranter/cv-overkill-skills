@@ -5,7 +5,7 @@ import {inject} from 'aurelia-framework'
 export class Edit {
   constructor(skillsSvc) {
     this.skillsSvc = skillsSvc;
-    this.opts = { max:100, step:5 };
+    this.sliderOpts = { max:100, step:5 };
   }
   attached() {
     return this.skillsSvc.getSkills().then(s => this.skills = s);
