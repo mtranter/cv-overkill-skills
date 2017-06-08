@@ -11,9 +11,9 @@ export class SkillsService{
       .then(d => d.json());
   }
   updateSkill(skill) {
-    return this.http.fetch(`http://api.marktranter.com/skills/${skill.name}`, {method:'DELETE', body: JSON.stringify({skillLevel: skill.skillLevel})})
+    return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}`, {method:'PATCH', body: JSON.stringify({skillLevel: skill.skillLevel})})
   }
   deleteSkill(skill) {
-    return this.http.fetch(`http://api.marktranter.com/skills/${skill.name}`, {method:'DELETE'})
+    return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}`, {method:'DELETE'})
   }
 }
