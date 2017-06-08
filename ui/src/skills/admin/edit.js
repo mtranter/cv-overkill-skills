@@ -9,15 +9,21 @@ export class Edit {
     this.sliderOpts = { max:100, step:5 };
   }
   attached() {
-    return this.skillsSvc.getSkills().then(s => this.skills = s);
+    return this.refresh();
   }
   addSkill(skill) {
-    this.skillsSvc.addSkill(skill).then(_ => newSkill = {name:'', skillLevel: 50});
+    this.skillsSvc.addSkill(skill).then(_ => {
+       this.newSkill = {name:'', skillLevel: 50};
+       this.refresh();
+     });
   }
   updateSkill(skill) {
-    this.skillsSvc.updateSkill(skill);
+    this.skillsSvc.updateSkill(skill).then(_ => this.refresh());
   }
   deleteSkill(skill){
-    this.skillsSvc.deleteSkill(skill);
+    this.skillsSvc.deleteSkill(skill).then(_ => this.refresh());
+  }
+  refresh() {
+    return this.skillsSvc.getSkills().then(s => this.skills = s);
   }
 }
