@@ -1,4 +1,4 @@
-<template>
+  <template>
   <require from="./skills.css"></require>
   <section id="skills" name="skills"></section>
   <div id="skills-wrapper" class="f">
@@ -7,15 +7,21 @@
         <h3 class="text-center">Skills</h3>
         <circle-break></circle-break>
         <!-- INTRO INFORMATION-->
-        <div class="col-lg-6 col-lg-offset-3">
-          <article class="experience-item" repeat.for="skill of skills">
-            <h5>${skill.name}</h5>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="${skill.skillLevel}" aria-valuemin="0" aria-valuemax="100" style="width: ${skill.skillLevel}%;">
-                <span class="sr-only">${skill.skillLevel}%</span>
+        <div class="col-lg-10 col-lg-offset-1">
+
+
+        <div class="row">
+          <div class="col-md-6" repeat.for="skillGroup of skills | groups:2">
+              <div class="experience-item" repeat.for="skill of skillGroup">
+              <h5>${skill.name}</h5>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="${skill.skillLevel}" aria-valuemin="0" aria-valuemax="100" style="width: ${skill.skillLevel}%;">
+                  <span class="sr-only">${skill.skillLevel}%</span>
+                </div>
               </div>
             </div>
-          </article>
+          </div>
+        </div>
         </div>
       </div>
     </div><!-- /container -->
