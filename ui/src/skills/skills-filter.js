@@ -10,14 +10,17 @@ export class SkillsFilterCustomElement {
   allSkills = [];
   tags = [];
   activeTags = [];
+
   constructor(bindingEngine) {
     this.subscription = bindingEngine.propertyObserver(this, 'skills')
       .subscribe((newValue, oldValue) => this.init(newValue));
   }
   init(skills) {
-    this.allSkills = skills
-    this.tags = flatMap(s => s.tags, this.allSkills).filter((value, index, self) => self.indexOf(value) === index);
-    this.subscription.dispose();
+    if(skills && skills.length) {
+      this.allSkills = skills
+      this.tags = flatMap(s => s.tags, this.allSkills).filter((value, index, self) => self.indexOf(value) === index);
+      this.subscription.dispose();
+    }
   }
   attached() {
     if(this.skills && this.skills.length) this.init(this.skills);
@@ -26,12 +29,12 @@ export class SkillsFilterCustomElement {
     let index = this.activeTags.indexOf(tag)
     if(index === -1) {
       this.activeTags.push(tag)
-    }else {
+    } else {
       this.activeTags.splice(index, 1)
     }
     this.refresh();
   }
   refresh() {
-    this.skills = this.allSkills.filter(s => this.activeTags.length == 0 || this.activeTags.some(t => s.tags.indexOf(t) > -1));
+    this.skills = this.allSkills.filter(s => this.activeTags.length === 0 || this.activeTags.some(t => s.tags.indexOf(t) > -1));
   }
 }
