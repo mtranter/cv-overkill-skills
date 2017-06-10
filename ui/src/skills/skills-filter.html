@@ -1,6 +1,6 @@
 <template>
   <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary ${isActive(tag) ? active : ''}" repeat.for="tag of tags" click.delegate="toggleTag(tag)">
+  <label repeat.for="tag of tags" class="btn btn-primary ${$parent.isActive(tag) ? active : ''}"  click.delegate="toggleTag(tag)">
     <input type="checkbox" autocomplete="off" checked> ${tag}
   </label>
 </div>
