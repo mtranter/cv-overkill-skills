@@ -49,15 +49,16 @@ object Main extends StreamApp {
 
 
   case class SkillLevelUpdate(skillLevel: Int)
+  case class CreateSkillCommand(name:String, skillLevel: Int)
 
   val skillsService: AuthedService[User] = AuthedService {
     case GET -> Root as user =>
       Ok(skillsRepo.flatMap(r => r.getSkills().map(s => s.asJson)))
     case req@POST -> Root as AuthorizedUser(AdminRole)  =>
       val json = for {
-        skill <- req.req.as(jsonOf[Skill])
+        skill <- req.req.as(jsonOf[CreateSkillCommand])
         repo <- Task.fromFuture(skillsRepo)
-        u <- Task.fromFuture(repo.saveSkill(skill))
+        u <- Task.fromFuture(repo.saveSkill(Skill(skill.name, skill.skillLevel, Set())))
       } yield skill.asJson
       Created(json)
     case req@PATCH -> Root / name as AuthorizedUser(AdminRole) =>
