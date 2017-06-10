@@ -20,7 +20,7 @@ export class SkillsFilterCustomElement {
     this.subscription.dispose();
   }
   attached() {
-    if(this.skills) this.init(this.skills);
+    if(this.skills && this.skills.length) this.init(this.skills);
   }
   toggleTag(tag) {
     let index = this.activeTags.indexOf(tag)
