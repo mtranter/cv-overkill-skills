@@ -16,8 +16,9 @@ trait SkillsRepository {
   def getSkills(): Future[Seq[Skill]]
   def deleteSkill(name: String): Future[Unit]
   def updateSkill(name: String, skillLevel: Int): Future[Unit]
+  def addTag(name: String, tag: String): Future[Boolean]
+  def deleteTag(name: String, tag: String): Future[Boolean]
 }
-
 
 
 object MongoSkillsRepository {
@@ -56,4 +57,18 @@ class MongoSkillsRepository(db: DefaultDB)(implicit ec: ExecutionContext) extend
       BSONDocument("$set" -> BSONDocument("skillLevel" -> skillLevel)))
     col.findAndModify(BSONDocument("_id" -> name), updateOp).map(_ => ())
   }
+
+  override def addTag(name: String, tag: String): Future[Boolean] =  addDeleteTag(true)(name, tag)
+
+  override def deleteTag(name: String, tag: String): Future[Boolean] = addDeleteTag(false)(name, tag)
+
+  private def addDeleteTag(add: Boolean)( name: String, tag: String): Future[Boolean] = {
+    val updateOp = col.updateModifier(
+      BSONDocument((if(add) "$push" else "$pull") -> BSONDocument("tags" -> tag)))
+    col.findAndModify(BSONDocument("_id" -> name), updateOp).map(r => r.value match {
+      case None => false
+      case Some(v) => v.elements.nonEmpty
+    })
+  }
+
 }

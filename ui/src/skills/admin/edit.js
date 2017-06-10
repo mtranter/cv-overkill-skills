@@ -17,6 +17,12 @@ export class Edit {
        this.refresh();
      });
   }
+  addTag(skill, tag){
+    this.skillSvc.addTag(skill, tag).then(_ => this.refresh());
+  }
+  deleteTag(skill, tag){
+    this.deleteTag.addTag(skill, tag).then(_ => this.refresh());
+  }
   updateSkill(skill) {
     this.skillsSvc.updateSkill(skill).then(_ => this.refresh());
   }

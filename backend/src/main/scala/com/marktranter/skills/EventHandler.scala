@@ -26,7 +26,7 @@ class SkillsEventHandler(repo: SkillsRepository)(implicit ec: ExecutionContext) 
     case ExperienceSkillAdded(co, skill) => {
       repo.getSkills() map { s =>
         s.find(s => s.name == skill) match {
-          case None => repo.saveSkill(Skill(skill, 50))
+          case None => repo.saveSkill(Skill(skill, 50,Set()))
           case _ => Future.unit
         }
       }

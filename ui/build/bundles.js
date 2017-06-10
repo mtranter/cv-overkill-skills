@@ -9,7 +9,8 @@ module.exports = {
       "includes": [
         "[**/**/*.js]",
         "[**/*.html!text]",
-        "[**/*.css!text]"
+        "[**/*.css!text]",
+        "pleasejs"
       ],
       "excludes":[
         "test-harness.js"

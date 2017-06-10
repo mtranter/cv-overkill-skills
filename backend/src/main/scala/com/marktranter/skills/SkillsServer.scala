@@ -1,4 +1,6 @@
 package com.marktranter.skills
+import cats.data.OptionT
+import cats.instances.future._
 import com.marktranter.skills.models.Skill
 import fs2.{Strategy, Task}
 import org.http4s.{AuthedService, HttpService}
@@ -8,6 +10,7 @@ import org.http4s.server.middleware.{CORS, CORSConfig}
 import org.http4s.server.blaze._
 import org.http4s.util.StreamApp
 import com.marktranter.skills.auth._
+import fs2.interop.cats._
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 import org.http4s._
@@ -39,6 +42,12 @@ object Main extends StreamApp {
   val authMiddleware = AuthMiddleware(Authentication(JwtTokenValidator("https://marktranter.eu.auth0.com/.well-known/jwks.json")))
   var roleMiddleware = ClaimsMiddleware(ClaimsAuthorization(Map("sub" -> "github|3257273")))
 
+  private def getSkill(name: String): Future[Option[Skill]] = for {
+    repo <- skillsRepo
+    skills <- repo.getSkills()
+  } yield skills.find(s => s.name == name)
+
+
   case class SkillLevelUpdate(skillLevel: Int)
 
   val skillsService: AuthedService[User] = AuthedService {
@@ -64,6 +73,13 @@ object Main extends StreamApp {
         f <- Task.fromFuture(s)
       } yield Response(f)
     case req@DELETE -> Root / name as AuthorizedUser(AdminRole) => Ok(skillsRepo.flatMap(r => r.deleteSkill(name)))
+    case req@POST -> Root / name / "tags" as AuthorizedUser(AdminRole) =>
+        for {
+          tag <- req.req.as(jsonOf[String])
+          repo <- Task.fromFuture(skillsRepo)
+          allOk <- Task.fromFuture(repo.addTag(name,tag))
+          status = if(allOk) Status.Ok else Status.NotFound
+        } yield Response(status)
   }
 
   val corsCfg = CORSConfig(
