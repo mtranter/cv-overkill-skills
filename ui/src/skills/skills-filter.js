@@ -16,7 +16,8 @@ export class SkillsFilterCustomElement {
   }
   init(skills) {
     this.allSkills = skills
-    this.tags = flatMap(s => s.tags, this.allSkills).filter((value, index, self) => self.indexOf(value) === index)
+    this.tags = flatMap(s => s.tags, this.allSkills).filter((value, index, self) => self.indexOf(value) === index);
+    this.subscription.dispose();
   }
   attached() {
     if(this.skills) this.init(this.skills);
@@ -32,8 +33,5 @@ export class SkillsFilterCustomElement {
   }
   refresh() {
     this.skills = this.allSkills.filter(s => this.activeTags.length == 0 || this.activeTags.some(t => s.tags.indexOf(t) > -1));
-  }
-  dispose() {
-    this.subscription.dispose();
   }
 }
