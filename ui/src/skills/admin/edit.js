@@ -18,10 +18,10 @@ export class Edit {
      });
   }
   addTag(skill, tag){
-    this.skillSvc.addTag(skill, tag).then(_ => this.refresh());
+    this.skillsSvc.addTag(skill, tag).then(_ => this.refresh());
   }
   deleteTag(skill, tag){
-    this.skillSvc.deleteTag(skill, tag).then(_ => this.refresh());
+    this.skillsSvc.deleteTag(skill, tag).then(_ => this.refresh());
   }
   updateSkill(skill) {
     this.skillsSvc.updateSkill(skill).then(_ => this.refresh());
