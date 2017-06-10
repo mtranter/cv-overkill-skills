@@ -25,6 +25,9 @@ export class SkillsFilterCustomElement {
   attached() {
     if(this.skills && this.skills.length) this.init(this.skills);
   }
+  isActive(tag) {
+    return this.activeTags.indexOf(tag) > -1;
+  }
   toggleTag(tag) {
     let index = this.activeTags.indexOf(tag)
     if(index === -1) {
