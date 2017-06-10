@@ -26,7 +26,7 @@ export class SkillsFilterCustomElement {
     if(index === -1) {
       this.activeTags.push(tag)
     }else {
-      this.activeTags.splice(index, -1)
+      this.activeTags.splice(index, 1)
     }
     this.refresh();
   }
