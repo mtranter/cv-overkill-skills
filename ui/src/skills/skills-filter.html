@@ -1,6 +1,6 @@
 <template>
   <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary" repeat.for="tag of tags" click.bind="toggleTag(tag)">
+  <label class="btn btn-primary" repeat.for="tag of tags" click.delegate="toggleTag(tag)">
     <input type="checkbox" autocomplete="off" checked> ${tag}
   </label>
 </div>
