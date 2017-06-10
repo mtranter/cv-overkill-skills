@@ -20,8 +20,11 @@
       <slider value.bind="skill.skillLevel" opts.bind="$parent.sliderOpts"></slider>
 
       <div class="tags">
-        <span class="label label-success" repeat.for="tag of skill.tags">${tech} <span click.delegate="$parent.$parent.removeTag(experience, tech)"><i class="fa fa-remove"></i></span></span>
-        <form submit.delegate="$parent.addTag(skill, tag)">
+        <span class="label label-success" repeat.for="tag of skill.tags">${tech}
+          <span click.delegate="$parent.$parent.deleteTag(skill, tag)"><i class="fa fa-remove"></i>
+          </span>
+        </span>
+        <form submit.delegate="$parent.addTag(skill, newTag)">
           <input class="form-control" type="text" ref="newTag" />
         </form>
       </div>

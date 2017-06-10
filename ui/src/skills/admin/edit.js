@@ -21,7 +21,7 @@ export class Edit {
     this.skillSvc.addTag(skill, tag).then(_ => this.refresh());
   }
   deleteTag(skill, tag){
-    this.deleteTag.addTag(skill, tag).then(_ => this.refresh());
+    this.skillSvc.deleteTag(skill, tag).then(_ => this.refresh());
   }
   updateSkill(skill) {
     this.skillsSvc.updateSkill(skill).then(_ => this.refresh());
