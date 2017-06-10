@@ -20,19 +20,12 @@ describe('IndexComponent', () => {
   });
 
   it('should render list of tags', done => {
-    component.manuallyHandleLifecycle().create(bootstrap)
-    .then(() => component.bind())
-    .then(() => {
-      const checkboxTag = document.querySelector('label');
-      expect(checkboxTag).toBe(null);
-    })
-    .then(() => component.attached())
-    .then(() => {
+    component.create(bootstrap).then(() => {
       const checkboxTags = [].slice.call(document.querySelectorAll('label'));
       expect(checkboxTags.map(t => t.innerText.trim())).toEqual(['dotnet','language','java']);
     })
     .then(done)
-    .catch(e => { console.log(e.message); throw e;  })
+    .catch(e => { console.log(e.message); console.log(e.stack); throw e;  })
   });
 
   afterEach(() => {

@@ -20,7 +20,7 @@
       <slider value.bind="skill.skillLevel" opts.bind="$parent.sliderOpts"></slider>
 
       <div class="tags">
-        <span class="label label-success" repeat.for="tag of skill.tags">${tech}
+        <span class="label label-success" repeat.for="tag of skill.tags">${tag}
           <span click.delegate="$parent.$parent.deleteTag(skill, tag)"><i class="fa fa-remove"></i>
           </span>
         </span>
