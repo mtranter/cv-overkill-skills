@@ -24,7 +24,7 @@
           <span click.delegate="$parent.$parent.deleteTag(skill, tag)"><i class="fa fa-remove"></i>
           </span>
         </span>
-        <form submit.delegate="$parent.addTag(skill, newTag)">
+        <form submit.delegate="$parent.addTag(skill, newTag.value)">
           <input class="form-control" type="text" ref="newTag" />
         </form>
       </div>
