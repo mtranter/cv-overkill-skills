@@ -9,6 +9,7 @@ export class SkillsFilterCustomElement {
   selectedFilters = [];
   allSkills = [];
   tags = [];
+  activeTags = [];
   constructor(bindingEngine) {
     this.subscription = bindingEngine.propertyObserver(this, 'skills')
       .subscribe((newValue, oldValue) => this.init(newValue));
@@ -21,16 +22,16 @@ export class SkillsFilterCustomElement {
     if(this.skills) this.init(this.skills);
   }
   toggleTag(tag) {
-    let index = this.tags.indexOf(tag)
+    let index = this.activeTags.indexOf(tag)
     if(index === -1) {
-      this.tags.push(tag)
+      this.activeTags.push(tag)
     }else {
-      this.tags.splice(index, -1)
+      this.activeTags.splice(index, -1)
     }
     this.refresh();
   }
   refresh() {
-    this.skills = this.allSkills.filter(s => s.tags.some(t => this.tags.indexOf(t) > -1));
+    this.skills = this.allSkills.filter(s => this.activeTags.length == 0 || this.activeTags.some(t => this.activeTags.indexOf(t) > -1));
   }
   dispose() {
     this.subscription.dispose();
