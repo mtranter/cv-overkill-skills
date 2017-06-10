@@ -31,7 +31,7 @@ export class SkillsFilterCustomElement {
     this.refresh();
   }
   refresh() {
-    this.skills = this.allSkills.filter(s => this.activeTags.length == 0 || this.activeTags.some(t => this.activeTags.indexOf(t) > -1));
+    this.skills = this.allSkills.filter(s => this.activeTags.length == 0 || this.activeTags.some(t => s.tags.indexOf(t) > -1));
   }
   dispose() {
     this.subscription.dispose();
