@@ -49,8 +49,8 @@ class MongoSkillsRepository(db: DefaultDB)(implicit ec: ExecutionContext) extend
   }
 
   override def getSkills(): Future[Seq[Skill]] = {
-      col.find[BSONDocument](BSONDocument.empty).cursor[Skill]().collect[Seq](-1, (s: Seq[Skill], t: Throwable) => Cont(s))
-    }
+    col.find[BSONDocument](BSONDocument.empty).cursor[Skill]().collect[Seq](-1, (s: Seq[Skill], t: Throwable) => Cont(s))
+  }
 
   override def updateSkill(name: String, skillLevel: Int): Future[Unit] = {
     val updateOp = col.updateModifier(
