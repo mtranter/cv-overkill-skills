@@ -10,7 +10,7 @@
         <!-- INTRO INFORMATION-->
         <div class="col-lg-10 col-lg-offset-1">
         <div class="row">
-          <skills-filter skill.bind="skills"></skills-filter>
+          <skills-filter skills.bind="skills"></skills-filter>
           <div class="col-md-6" repeat.for="skillGroup of skills | groups:2">
               <div class="experience-item" repeat.for="skill of skillGroup">
               <h5>${skill.name}</h5>
