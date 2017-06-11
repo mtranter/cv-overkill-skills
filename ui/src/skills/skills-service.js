@@ -17,7 +17,7 @@ export class SkillsService{
     return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}/tags`, {method:'POST', body: JSON.stringify(tag)})
   }
   deleteTag(skill, tag) {
-    return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}/tags/${tag}`, {method:'DELETE'})
+    return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}/tags/${encodeURI(tag)}`, {method:'DELETE'})
   }
   updateSkill(skill) {
     return this.http.fetch(`http://api.marktranter.com/skills/${encodeURIComponent(skill.name)}`, {method:'PATCH', body: JSON.stringify({skillLevel: skill.skillLevel})})
