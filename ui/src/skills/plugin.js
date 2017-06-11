@@ -2,7 +2,7 @@ export function configure(config){
   let container = config.container;
   container.registerInstance('plugin.admin.route',  { route: ['skills'],  name: 'edit-skills',  moduleId: 'skills/admin/edit', title: 'Skills', nav: true,
     settings:{
-      icon: 'fa-address-card'
+      icon: 'fa-bar-chart'
     }
  });
 
