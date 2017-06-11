@@ -30,7 +30,6 @@ object Main extends StreamApp {
   implicit val strategy = Strategy.fromExecutionContext(ec)
   val connectionUrl = sys.env.getOrElse("MONGO_CONNECTION","mongodb://localhost/")
 
-  println("Using mongo connection " + connectionUrl)
   val skillsRepo = MongoSkillsRepository.init(connectionUrl +"skills")
 
   skillsRepo.map(r => {
@@ -81,6 +80,7 @@ object Main extends StreamApp {
           allOk <- Task.fromFuture(repo.addTag(name,tag))
           status = if(allOk) Status.Ok else Status.NotFound
         } yield Response(status)
+    case req@DELETE -> Root / name / "tags" / skill as AuthorizedUser(AdminRole) => Ok(skillsRepo.flatMap(r => r.deleteTag(name,skill)))
   }
 
   val corsCfg = CORSConfig(
