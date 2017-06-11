@@ -80,7 +80,12 @@ object Main extends StreamApp {
           allOk <- Task.fromFuture(repo.addTag(name,tag))
           status = if(allOk) Status.Ok else Status.NotFound
         } yield Response(status)
-    case req@DELETE -> Root / name / "tags" / skill as AuthorizedUser(AdminRole) => Ok(skillsRepo.flatMap(r => r.deleteTag(name,skill)))
+    case req@DELETE -> Root / name / "tags" / tag as AuthorizedUser(AdminRole) =>
+        val ok = for {
+          repo <- skillsRepo
+          exists <- repo.deleteTag(name, tag)
+        } yield if(exists) Status.Ok else Status.NotFound
+        Task.fromFuture(ok.map(k => Response(k)))
   }
 
   val corsCfg = CORSConfig(
